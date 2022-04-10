@@ -7,6 +7,25 @@ components:
           items:
             type: object
             properties:
+              code:
+                type: string
+                example: 1001
               message:
                 type: string
-                example: Something went wrong :(
+                example: The email is already exist
+    ErrorWithFields:
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              code:
+                type: string
+                example: 1000
+              message:
+                type: string
+                example: The email must be in uppercase
+              field:
+                type: string
+                example: email

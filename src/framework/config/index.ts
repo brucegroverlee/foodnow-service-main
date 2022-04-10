@@ -11,6 +11,10 @@ const config = {
   server: {
     port: process.env.PORT || 4005,
   },
+  jwt: {
+    accessTokenSecret: process.env.AUTH_ACCESS_TOKEN_SECRET || '',
+    refreshTokenSecret: process.env.AUTH_REFRESH_TOKEN_SECRET || '',
+  },
   mysql: {
     host: process.env.MYSQL_HOST || 'localhost',
     port: process.env.MYSQL_PORT || 3306,

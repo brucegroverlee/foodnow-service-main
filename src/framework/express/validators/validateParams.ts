@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 
 import Joi from 'joi';
-import NotAcceptableError from '../../../../../infrastructure/express/errors/NotAcceptableError';
+import NotAcceptableError from '../errors/NotAcceptableError';
 
 function validateParams(schema: Joi.ObjectSchema) {
   return (request: Request, response: Response, next: () => void) => {

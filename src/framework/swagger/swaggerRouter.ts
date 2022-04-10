@@ -18,7 +18,7 @@ const swaggerConfig = {
       },
     ],
   },
-  apis: ['./src/infrastructure/**/*.yml', './src/contexts/**/*.yml'],
+  apis: ['./src/framework/**/*.yml', './src/contexts/**/*.yml'],
 };
 
 const swaggerDocument = swaggerJsdoc(swaggerConfig);

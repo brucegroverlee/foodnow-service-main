@@ -56,8 +56,8 @@ class ExpressApp {
   }
 
   private loadNotFoundError(): void {
-    this.app.all('*', (req, res) => {
-      throw new NotFoundError();
+    this.app.all('*', (req, res, next) => {
+      next(new NotFoundError());
     });
   }
 
