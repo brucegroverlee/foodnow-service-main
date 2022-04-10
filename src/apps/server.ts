@@ -5,8 +5,9 @@ import { sequelizeApp } from '../framework/sequelize/SequelizeApp';
 
 import swaggerRouter from '../framework/swagger/swaggerRouter';
 import authModule from '../contexts/auth/authModule';
+import usersModule from '../contexts/users/usersModule';
 
-const httpServer = new ExpressApp([swaggerRouter, authModule.router]);
+const httpServer = new ExpressApp([swaggerRouter, authModule.router, usersModule.router]);
 
 httpServer.start([sequelizeApp.connect(), rabbitmqApp.connect()]);
 

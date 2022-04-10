@@ -1,4 +1,4 @@
-import express, { Request, Response } from 'express';
+import express from 'express';
 import validateBody from '../../../../framework/express/validators/validateBody';
 import authBodySchemas from './authBodySchemas';
 import AuthController from './AuthController';

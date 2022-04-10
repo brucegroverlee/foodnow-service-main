@@ -13,7 +13,6 @@ const config = {
   },
   jwt: {
     accessTokenSecret: process.env.AUTH_ACCESS_TOKEN_SECRET || '',
-    refreshTokenSecret: process.env.AUTH_REFRESH_TOKEN_SECRET || '',
   },
   mysql: {
     host: process.env.MYSQL_HOST || 'localhost',

@@ -1,22 +1,10 @@
 import { NextFunction, Request, Response } from 'express';
-import InvalidArgumentError from '../../../../framework/domain/valueObject/InvalidArgumentError';
-import NotAcceptableError from '../../../../framework/express/errors/NotAcceptableError';
 import AuthApplication, { RegisterData, LoginData, RefreshTokenData } from '../../application/AuthApplication';
 import AuthPresenterImpl from '../AuthPresenterImpl';
 import { passwordServiceImpl } from '../PasswordServiceImpl';
 import { refreshTokenDAOImpl } from '../RefreshTokenDAOImpl';
 import { tokenServiceImpl } from '../TokenServiceImpl';
-import { usersDAOImpl } from '../UserDAOImpl';
-
-interface RegisterBody {
-  email: string;
-  password: string;
-}
-
-interface LoginBody {
-  email: string;
-  password: string;
-}
+import { usersDAOImpl } from '../UsersDAOImpl';
 
 class AuthController {
   private authApplication: AuthApplication;

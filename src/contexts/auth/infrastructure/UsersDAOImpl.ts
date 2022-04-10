@@ -2,7 +2,7 @@ import UsersDAO from '../application/UsersDAO';
 import UserDTO from '../application/UserDTO';
 import { EntityId } from '../../../framework/domain/types';
 
-const db: UserDTO[] = [];
+export const db: UserDTO[] = [];
 
 export const usersDAOImpl: UsersDAO = {
   async getOneByEmail(email: string): Promise<UserDTO | null> {

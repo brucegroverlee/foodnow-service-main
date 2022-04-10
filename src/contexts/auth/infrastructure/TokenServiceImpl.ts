@@ -4,21 +4,21 @@ import config from '../../../framework/config';
 import TokenService from '../application/TokenService';
 import { EntityId } from '../../../framework/domain/types';
 import UserDTO from '../application/UserDTO';
+import { AccessTokenPayload } from '../../../framework/express/types';
+
+const TOKEN_EXPIRES_IN = '15m';
 
 export const tokenServiceImpl: TokenService = {
   getRenewAccessToken: function (user: UserDTO): { accessToken: string; expires: number } {
-    const accessToken = jwt.sign(
-      {
-        user: {
-          id: user.id,
-          email: user.email,
-        },
+    const accessTokenPayload: AccessTokenPayload = {
+      user: {
+        id: user.id,
       },
-      config.jwt.accessTokenSecret,
-      {
-        expiresIn: '1h',
-      },
-    );
+    };
+
+    const accessToken = jwt.sign(accessTokenPayload, config.jwt.accessTokenSecret, {
+      expiresIn: TOKEN_EXPIRES_IN,
+    });
 
     return {
       accessToken,
@@ -34,12 +34,18 @@ export const tokenServiceImpl: TokenService = {
     return now > expiresIn;
   },
 
-  getTokens: async function (data: {
+  getTokens: async function (user: {
     id: EntityId;
     email: string;
   }): Promise<{ accessToken: string; refreshToken: string; expires: number }> {
-    const accessToken = jwt.sign({ user: data }, config.jwt.accessTokenSecret, {
-      expiresIn: '1h',
+    const accessTokenPayload: AccessTokenPayload = {
+      user: {
+        id: user.id,
+      },
+    };
+
+    const accessToken = jwt.sign(accessTokenPayload, config.jwt.accessTokenSecret, {
+      expiresIn: TOKEN_EXPIRES_IN,
     });
 
     const refreshToken = v4();
