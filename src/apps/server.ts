@@ -9,6 +9,8 @@ import usersModule from '../contexts/users/usersModule';
 
 const httpServer = new ExpressApp([swaggerRouter, authModule.router, usersModule.router]);
 
-httpServer.start([sequelizeApp.connect(), rabbitmqApp.connect()]);
+httpServer.start([
+  /* sequelizeApp.connect(), rabbitmqApp.connect() */
+]);
 
 export { httpServer };

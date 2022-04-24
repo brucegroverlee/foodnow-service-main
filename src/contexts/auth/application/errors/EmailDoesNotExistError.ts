@@ -2,7 +2,7 @@ import BadRequestError from '../../../../framework/express/errors/BadRequestErro
 
 class EmailDoesNotExistError extends BadRequestError {
   constructor() {
-    super('Email does not exist');
+    super('The email does not exist');
   }
 }
 

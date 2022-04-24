@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
-import { UserTokenPayload, AccessTokenPayload, AuthenticatedRequest } from '../types';
+import { AccessTokenPayload, AuthenticatedRequest } from '../types';
 import config from '../../config';
 import UnauthorizedError from '../errors/UnauthorizedError';
 
@@ -11,13 +11,17 @@ function validateAuthentication(request: Request, response: Response, next: Next
     return;
   }
 
-  const [schema, accessToken] = request.headers.authorization!.split(' ');
+  try {
+    const [schema, accessToken] = request.headers.authorization!.split(' ');
 
-  const payload: AccessTokenPayload = jwt.verify(accessToken, config.jwt.accessTokenSecret);
+    const payload: AccessTokenPayload = jwt.verify(accessToken, config.jwt.accessTokenSecret);
 
-  (request as AuthenticatedRequest).user = payload.user;
+    (request as AuthenticatedRequest).user = payload.user;
 
-  next();
+    next();
+  } catch (error) {
+    next(new UnauthorizedError());
+  }
 }
 
 export default validateAuthentication;

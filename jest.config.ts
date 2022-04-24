@@ -4,10 +4,10 @@ const config: Config.InitialOptions = {
   verbose: true,
   preset: 'ts-jest',
   testEnvironment: 'node',
-  globalSetup: './src/infrastructure/jest/globalSetup.ts',
-  globalTeardown: './src/infrastructure/jest/globalTeardown.ts',
-  setupFiles: ['./src/infrastructure/jest/setupFiles.ts'],
-  setupFilesAfterEnv: ['./src/infrastructure/jest/setupFilesAfterEnv.ts'],
+  globalSetup: './src/framework/jest/globalSetup.ts',
+  globalTeardown: './src/framework/jest/globalTeardown.ts',
+  setupFiles: ['./src/framework/jest/setupFiles.ts'],
+  setupFilesAfterEnv: ['./src/framework/jest/setupFilesAfterEnv.ts'],
 };
 
 export default config;

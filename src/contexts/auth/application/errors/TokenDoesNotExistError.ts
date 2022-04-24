@@ -1,6 +1,6 @@
-import BadRequestError from '../../../../framework/express/errors/BadRequestError';
+import UnauthorizedError from '../../../../framework/express/errors/UnauthorizedError';
 
-class TokenDoesNotExistError extends BadRequestError {
+class TokenDoesNotExistError extends UnauthorizedError {
   constructor() {
     super("The token doesn't exist");
   }

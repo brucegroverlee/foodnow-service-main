@@ -1,6 +1,7 @@
 export interface ErrorResponse {
-  code: string|number;
+  code?: string | number;
   message: string;
+  field?: string;
 }
 
 abstract class HttpError extends Error {

@@ -1,17 +1,28 @@
-import HttpError from './HttpError';
+import HttpError, { ErrorResponse } from './HttpError';
 
 class BadRequestError extends HttpError {
   public errorCode: string | number;
-  statusCode = 400;
+  public statusCode = 400;
+  public errors: ErrorResponse[] | null = null;
 
-  constructor(public message: string = 'Bad Request', errorCode?: string | number) {
-    super(message);
+  constructor(data: string | ErrorResponse[] = 'Bad Request', errorCode?: string | number) {
+    super(typeof data === 'string' ? data : 'Bad Request');
+
+    this.statusCode = this.statusCode;
     this.errorCode = errorCode || this.statusCode;
+
+    if (typeof data !== 'string') {
+      this.errors = data;
+    }
 
     Object.setPrototypeOf(this, BadRequestError.prototype);
   }
 
   serializeErrors() {
+    if (this.errors) {
+      return this.errors;
+    }
+
     return [{ code: this.errorCode, message: this.message }];
   }
 }

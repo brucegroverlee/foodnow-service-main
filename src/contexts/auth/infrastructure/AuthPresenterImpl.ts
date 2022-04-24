@@ -1,17 +1,20 @@
 import { Response } from 'express';
 import AuthPresenter from '../application/AuthPresenter';
+import TokensDTO from '../application/TokensDTO';
 
 class AuthPresenterImpl implements AuthPresenter {
-  public static RETURN_SUCCESS_AUTH_STATUS_CODE = 200;
-
   constructor(private response: Response) {}
 
-  returnTokens(data: { accessToken: string; refreshToken: string; expires: number }): void {
-    this.response.status(AuthPresenterImpl.RETURN_SUCCESS_AUTH_STATUS_CODE).json(data);
+  returnSignupTokens(data: TokensDTO): void {
+    this.response.status(201).json(data);
   }
 
-  returnAccessToken(data: { accessToken: string; expires: number }): void {
-    this.response.status(AuthPresenterImpl.RETURN_SUCCESS_AUTH_STATUS_CODE).json(data);
+  returnLoginTokens(data: TokensDTO): void {
+    this.response.status(200).json(data);
+  }
+
+  returnAccessToken(data: Omit<TokensDTO, 'refreshToken'>): void {
+    this.response.status(200).json(data);
   }
 }
 

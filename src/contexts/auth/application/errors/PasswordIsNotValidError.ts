@@ -2,7 +2,7 @@ import BadRequestError from '../../../../framework/express/errors/BadRequestErro
 
 class PasswordIsNotValidError extends BadRequestError {
   constructor() {
-    super('Password is not valid');
+    super('The password is not valid');
   }
 }
 

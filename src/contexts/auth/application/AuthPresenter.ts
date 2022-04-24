@@ -1,6 +1,9 @@
+import TokensDTO from './TokensDTO';
+
 interface AuthPresenter {
-  returnTokens(data: { accessToken: string; refreshToken: string; expires: number }): void;
-  returnAccessToken(data: { accessToken: string; expires: number }): void;
+  returnSignupTokens(data: TokensDTO): void;
+  returnLoginTokens(data: TokensDTO): void;
+  returnAccessToken(data: Omit<TokensDTO, 'refreshToken'>): void;
 }
 
 export default AuthPresenter;

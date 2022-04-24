@@ -1,10 +1,18 @@
 import { Request, Response } from 'express';
 
-import BaseError from '../errors/HttpError';
+import HttpError, { ErrorResponse } from '../errors/HttpError';
+
+export interface ErrorBody {
+  errors: ErrorResponse[];
+}
 
 const errorHandler = (err: Error, req: Request, res: Response, next): void => {
-  if (err instanceof BaseError) {
-    res.status(err.statusCode).send({ errors: err.serializeErrors() });
+  if (err instanceof HttpError) {
+    const errorBody: ErrorBody = {
+      errors: err.serializeErrors(),
+    };
+
+    res.status(err.statusCode).send(errorBody);
   } else {
     console.error('ErrorHandler: Server Error 500');
 

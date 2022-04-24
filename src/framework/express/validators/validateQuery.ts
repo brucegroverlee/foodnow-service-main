@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 
 import Joi from 'joi';
-import NotAcceptableError from '../errors/NotAcceptableError';
+import BadRequestError from '../errors/BadRequestError';
 
 function validateQuery(schema: Joi.ObjectSchema) {
   return (request: Request, response: Response, next: () => void) => {
@@ -13,7 +13,7 @@ function validateQuery(schema: Joi.ObjectSchema) {
         message: errorItem.message,
       }));
 
-      throw new NotAcceptableError(errorPayload);
+      throw new BadRequestError(errorPayload);
     } else {
       request.query = value;
 

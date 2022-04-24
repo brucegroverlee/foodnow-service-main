@@ -1,8 +1,8 @@
-import BadRequestError from '../../../../framework/express/errors/BadRequestError';
+import ConflictError from '../../../../framework/express/errors/ConflictError';
 
-class EmailAlreadyExistsError extends BadRequestError {
+class EmailAlreadyExistsError extends ConflictError {
   constructor() {
-    super('Email already exists');
+    super('The email already exists');
   }
 }
 

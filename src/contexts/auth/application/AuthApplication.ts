@@ -56,7 +56,7 @@ class AuthApplication {
       userId: entityId,
     });
 
-    authPresenter.returnTokens(tokens);
+    authPresenter.returnSignupTokens(tokens);
 
     // send welcome email
   }
@@ -84,7 +84,7 @@ class AuthApplication {
       userId: user.id,
     });
 
-    authPresenter.returnTokens(tokens);
+    authPresenter.returnLoginTokens(tokens);
   }
 
   public async refreshToken(data: RefreshTokenData, authPresenter: AuthPresenter): Promise<void> {

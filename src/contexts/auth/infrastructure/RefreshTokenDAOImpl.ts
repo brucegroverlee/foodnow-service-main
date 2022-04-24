@@ -7,7 +7,7 @@ interface Token {
   userId: EntityId;
 }
 
-const db: Token[] = [];
+export const db: Token[] = [];
 
 export const refreshTokenDAOImpl: RefreshTokenDAO = {
   delete: async function (data: { token: string }): Promise<void> {

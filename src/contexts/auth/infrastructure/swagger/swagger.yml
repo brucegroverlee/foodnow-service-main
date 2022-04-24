@@ -17,7 +17,7 @@ paths:
                   type: string
                   example: 123456
       responses:
-        '200':
+        '201':
           description: The user has been created
           content:
             application/json:
@@ -34,11 +34,41 @@ paths:
                     type: string
                     example: d744c2b1-10ba-4b41-9032-d1f68dd5ad6f
         '400':
-          description: Sign up error
+          description: Bad Request
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorWithFields'
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          example: 400
+                        message:
+                          type: string
+                          example: The email field is required
+        '409':
+          description: The user already exists
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          example: 409
+                        message:
+                          type: string
+                          example: Email already exists
 
   /auth/login:
     post:
@@ -74,11 +104,25 @@ paths:
                     type: string
                     example: d744c2b1-10ba-4b41-9032-d1f68dd5ad6f
         '400':
-          description: Login error
+          description: Bad Request. The message could be "The email does not exist",
+            "The password is not valid", or when there is a missed attribute,
+            the message is '"password" is required' and the property 'field' with the value 'password'
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorWithFields'
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          example: 400
+                        message:
+                          type: string
+                          example: The email field is required
 
   /auth/refresh-token:
     post:
@@ -107,9 +151,21 @@ paths:
                   expires:
                     type: number
                     example: 3600
-        '400':
-          description: Login error
+        '401':
+          description: Unauthorized
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorWithFields'
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          example: 401
+                        message:
+                          type: string
+                          example: Unauthorized
